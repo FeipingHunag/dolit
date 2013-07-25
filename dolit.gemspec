@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Dolit::VERSION
   spec.authors       = ["feipinghuang"]
   spec.email         = ["huang900107@163.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{video parse}
+  spec.summary       = %q{video parse}
   spec.homepage      = ""
   spec.license       = "MIT"
 
