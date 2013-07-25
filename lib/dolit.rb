@@ -17,7 +17,7 @@ module Dolit
   attach_function :video_freevideoresult, :DLVideo_FreeVideoResult, [:id], :void
 
   def self.parse(url, user_agent = nil)
-    pResult = MemoryPointer.new :pointer
+    pResult = FFI::MemoryPointer.new :pointer
     ret = video_parse(url, user_agent, pResult)
     return if ret != 0
     pos = 0
@@ -62,12 +62,12 @@ module Dolit
             segPinterPos += 4
             file_hash[:file_no] = pSegPtr.get_int(segPinterPos)
             segPinterPos += 4
-            file_hash[:url] = pSegPtr.get_int(segPinterPos).read_string
+            file_hash[:url] = pSegPtr.get_pointer(segPinterPos).read_string
             segPinterPos += 4
             type_hash[:files][j] = file_hash
           end
         end
-        res[:str_typs][i] = type_hash
+        res[:strs][i] = type_hash
       end
     end
     video_freevideoresult(pVideoResult)
