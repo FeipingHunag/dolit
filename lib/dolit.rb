@@ -22,7 +22,7 @@ module Dolit
     return if ret != 0
     pos = 0
     res = {}
-    pVideoResult = pResult.get_pointer
+    pVideoResult = pResult.read_pointer
     res[:site_id] = pVideoResult.get_int(pos)
     pos += 4
     res[:time_length] = pVideoResult.get_long(pos)
@@ -41,12 +41,13 @@ module Dolit
     pos += 4
     if count > 0
       p = 0
-      res[:str_typs] = []
+      res[:strs] = []
       0.upto(count - 1) do |i|
         type_hash = {}
         type_hash[:str_type] = pTypePtr.get_pointer(p).read_string
         p += 4
         segCount = pTypePtr.get_int(p)
+        p += 4
         pSegPtr = pTypePtr.get_pointer(p)
         p += 4
 
@@ -69,7 +70,7 @@ module Dolit
         res[:str_typs][i] = type_hash
       end
     end
-    video_freevideoresult(pResult)
+    video_freevideoresult(pVideoResult)
     res
   end
 end
