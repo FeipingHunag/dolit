@@ -42,7 +42,7 @@ module Dolit
     if count > 0
       p = 0
       res[:strs] = []
-      0.upto(count - 1) do |i|
+      count.times do |i|
         type_hash = {}
         type_hash[:str_type] = pTypePtr.get_pointer(p).read_string
         p += 4
@@ -54,7 +54,7 @@ module Dolit
         if segCount > 0
           type_hash[:files] = []
           segPinterPos = 0
-          0.upto(segCount - 1) do |j|
+          segCount.times do |j|
             file_hash = {}
             file_hash[:file_size] = pSegPtr.get_long(segPinterPos)
             segPinterPos += 8
